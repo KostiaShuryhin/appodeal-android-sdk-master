@@ -1,0 +1,6 @@
+include ':interstitial'
+include ':rewarded'
+include ':banner'
+include ':mrec'
+include ':native'
+include ':analytics'
