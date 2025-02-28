@@ -1,0 +1,17 @@
+workflows:
+  android-build:
+    name: Android Build
+    instance_type: linux_x2 # Или другой подходящий инстанс
+    environment:
+      groups:
+        - google_play # Если нужно для публикации
+    scripts:
+      - name: Set up keystore
+        script: |
+          echo $GCLOUD_SERVICE_KEY > google-services.json #Если нужно для публикации
+          echo $ANDROID_KEYSTORE_BASE64 | base64 --decode > keystore.jks
+      - name: Build Android app
+        script: |
+          ./gradlew assembleRelease
+    artifacts:
+      - app/build/outputs/apk/release/*.apk
